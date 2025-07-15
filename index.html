@@ -133,6 +133,17 @@
       0% { transform: translateY(0); opacity: 1; }
       100% { transform: translateY(-300px) scale(3); opacity: 0; }
     }
+
+    #stopMusicBtn {
+      display: none;
+      background-color: #444;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 0.9em;
+      margin-top: 20px;
+      border: none;
+      cursor: pointer;
+    }
   </style>
 </head>
 
@@ -141,13 +152,13 @@
   <!-- النجوم -->
   <div id="stars"></div>
 
-  <!-- نافذة ترحيبية -->
+  <!-- نافذة ترحيب -->
   <div id="welcomeModal">
     <div class="modal-content">
       <h1>🌙 أشواق... 🌙</h1>
       <p>
-        هذه رسالة وداع... من قلبي لقلبك.  
-        اضغطي على الزر، واقرئي آخر كلماتي لكِ.
+        هذه رسالة وداع... من قلبي لقلبك.<br>
+        اضغطي على الزر واقرئي آخر كلماتي لكِ.
       </p>
       <button onclick="startMessage()">أنا مستعدة 💌</button>
     </div>
@@ -165,37 +176,38 @@
 I will never forget our laughs, our deep conversations, and the simple things that made us close.
 
 أشواق، إن قلتِ يومًا أنني أخطأت بحقك، فاعلمي أنني لم أقصد أبداً جرحك.  
-If I ever made a mistake or said something wrong, I want you to know... I’m truly sorry.  
+If I ever made a mistake or said something wrong, I want you to know… I’m truly sorry.  
 لم يكن ذلك من قلبي، ولا بنية سيئة، فأنتِ شخص أقدّره بصدق.
 
 الوداع ليس سهلاً أبدًا، لكنه أحيانًا ضروريّ...  
-وأنا لا أقول وداعًا لأنني أريد ذلك، بل لأن الحياة تمضي، والقلوب تتوزع،  
-لكن رغم كل ذلك...  
-A part of my heart will always keep your name.
+وأنا لا أقول وداعًا لأنني أريد ذلك، بل لأن الحياة تمضي، والقلوب تتوزع.  
+لكن رغم كل ذلك، A part of my heart will always keep your name.
 
 قد لا تسير الأيام بنا جنبًا إلى جنب بعد الآن،  
 لكن كل خطوة من ماضيكِ في حياتي ستبقى نبضًا في ذاكرتي.  
-Our story may end here, but the feeling will stay... always.
+Our story may end here, but the feeling will stay… always.
 
 أتمنى لكِ السعادة من كل قلبي.  
-أتمنى أن تحققي كل أحلامك، وتعيشي حياة تليق بكِ وبقلبكِ الجميل.
+أن تحققي أحلامك، وتعيشي حياة تليق بكِ وبقلبكِ الجميل.
 
-Keep growing, keep smiling, keep dreaming ✨  
+Keep growing, keep smiling, keep dreaming.  
 You are strong, and your light will never fade.
 
 شكراً لكِ على كل لحظة حقيقية قضيناها معاً.  
-شكراً للوجود الذي جعل لحياتي معنى مختلفاً، حتى ولو لفترة قصيرة.
+شكراً للوجود اللي خلاني أعرف شخص مثلك.
 
 Goodbye أشواق…  
 But never truly farewell.
 
 – عماد
+    <br><br>
+    <button id="stopMusicBtn" onclick="stopMusic()">🔇 إيقاف الموسيقى</button>
   </div>
 
-  <!-- مشغل الموسيقى -->
+  <!-- الموسيقى -->
   <audio id="backgroundMusic" loop>
-    <source src="sad.mp3" type="audio/mp3">
-    متصفحك لا يدعم تشغيل الصوت
+    <source src="sad.mp3" type="audio/mp3" />
+    متصفحك لا يدعم تشغيل الصوت.
   </audio>
 
   <!-- سكربتات -->
@@ -203,20 +215,27 @@ But never truly farewell.
     function startMessage() {
       document.getElementById("welcomeModal").style.display = "none";
       document.getElementById("farewellMessage").style.display = "block";
+      document.getElementById("stopMusicBtn").style.display = "inline-block";
 
-      // تشغيل الموسيقى 🔊
-      document.getElementById("backgroundMusic").play();
+      const music = document.getElementById("backgroundMusic");
+      music.volume = 0.4;
+      music.play().catch(e => {
+        console.log("المتصفح رفض بدء الموسيقى تلقائيًا:", e);
+      });
 
-      // قلـوب
       setInterval(createHeart, 300);
-
-      // نجوم
       generateStars();
 
-      // ألعاب نارية
       for (let i = 0; i < 10; i++) {
         setTimeout(createFirework, i * 250);
       }
+    }
+
+    function stopMusic() {
+      const music = document.getElementById("backgroundMusic");
+      music.pause();
+      music.currentTime = 0;
+      document.getElementById("stopMusicBtn").style.display = "none";
     }
 
     function createHeart() {
@@ -255,5 +274,6 @@ But never truly farewell.
       return colors[Math.floor(Math.random() * colors.length)];
     }
   </script>
+
 </body>
 </html>
