@@ -1,77 +1,259 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🌸 مهمة خاصة لنوريشتي 🌸</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&display=swap" rel="stylesheet">
+  <title>رسالة وداع لأشواق 💔</title>
   <style>
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
     body {
-      margin: 0;
-      font-family: 'Cairo', sans-serif;
-      background: linear-gradient(to right, #ff5f6d, #ffc371);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      font-family: 'Arial', sans-serif;
       text-align: center;
+      background-image: url('https://images.unsplash.com/photo-1495231916356-a86217efff12?auto=format&fit=crop&w=1500&q=80');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #ffffff;
+      padding: 50px;
       min-height: 100vh;
-      padding: 20px;
+      overflow-y: auto;
     }
-    .container {
-      background-color: rgba(0, 0, 0, 0.5);
+
+    #welcomeModal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: white;
       padding: 30px;
-      border-radius: 20px;
-      max-width: 600px;
+      border-radius: 15px;
+      max-width: 90%;
+      text-align: center;
+      color: #6a0572;
+      box-shadow: 0 0 25px #ff69b4;
     }
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 20px;
-    }
-    p {
-      font-size: 1.3em;
-      margin-bottom: 30px;
-    }
+
     button {
-      background-color: #ff69b4;
+      background-color: #b8008a;
+      color: white;
       border: none;
       padding: 15px 30px;
-      color: white;
-      font-size: 1.2em;
-      font-weight: bold;
-      border-radius: 999px;
+      font-size: 1.1em;
+      border-radius: 10px;
       cursor: pointer;
+      margin-top: 20px;
       transition: background-color 0.3s;
     }
+
     button:hover {
-      background-color: #ff1493;
+      background-color: #88006e;
     }
-    #secret {
+
+    .message {
       display: none;
-      margin-top: 30px;
-      font-size: 1.2em;
-      background: white;
-      color: #ff1493;
-      padding: 15px;
-      border-radius: 15px;
+      font-size: 1.4em;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 40px;
+      border-radius: 20px;
+      margin-top: 50px;
+      line-height: 2.2;
+      max-width: 850px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #ffe1f0;
+      box-shadow: 0 0 20px rgba(255,105,180,0.5);
+      position: relative;
+      z-index: 5;
+      white-space: pre-wrap;
     }
-    a {
-      color: #ff1493;
-      text-decoration: none;
-      font-weight: bold;
+
+    .heart {
+      position: fixed;
+      top: -50px;
+      font-size: 24px;
+      color: pink;
+      animation: fall linear infinite;
+      z-index: 0;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+      }
+    }
+
+    #stars {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0; left: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .star {
+      width: 2px;
+      height: 2px;
+      background: white;
+      position: absolute;
+      border-radius: 50%;
+      animation: twinkle 2s infinite;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.3; }
+      50% { opacity: 1; }
+      100% { opacity: 0.3; }
+    }
+
+    .firework {
+      position: fixed;
+      left: 50%;
+      bottom: 0;
+      width: 10px;
+      height: 10px;
+      background-color: white;
+      border-radius: 50%;
+      animation: explode 1s ease-out;
+      z-index: 10;
+    }
+
+    @keyframes explode {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-300px) scale(3); opacity: 0; }
     }
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <h1>🌸 إلى نوريشتي الجميلة 🌸</h1>
-    <p>للوصول إلى مفاجأتك الحقيقية... عليك أولاً أن تضغطي على الزر أدناه، فقط إذا كنتِ مستعدة 😏</p>
-    <button onclick="document.getElementById('secret').style.display='block'">🎁 نعم، أنا مستعدة!</button>
-    <div id="secret">
-      هذا هو الرابط السري للمفاجأة الحقيقية :<br><br>
-      <a href="https://imwathri.github.io/Nourishti-birthday-game/" target="_blank">https://imwathri.github.io/Nourishti-birthday-game/</a>
+
+  <!-- النجوم -->
+  <div id="stars"></div>
+
+  <!-- نافذة ترحيبية -->
+  <div id="welcomeModal">
+    <div class="modal-content">
+      <h1>🌙 أشواق... 🌙</h1>
+      <p>
+        هذه رسالة وداع... من قلبي لقلبك.  
+        اضغطي على الزر، واقرئي آخر كلماتي لكِ.
+      </p>
+      <button onclick="startMessage()">أنا مستعدة 💌</button>
     </div>
   </div>
+
+  <!-- الرسالة -->
+  <div class="message" id="farewellMessage">
+أشواق...
+
+تمر الأيام وتختلف الطرق، لكن هناك أشخاص يبقون محفورين في القلب، مهما ابتعدوا...  
+وأنتِ منهم.
+
+لقد كانت معرفتي بكِ من أجمل الصدف في حياتي،  
+لحظاتنا معاً لم تكن مجرد وقت، بل كانت ذكريات تُضيء قلبي كلما تذكّرتُها.  
+I will never forget our laughs, our deep conversations, and the simple things that made us close.
+
+أشواق، إن قلتِ يومًا أنني أخطأت بحقك، فاعلمي أنني لم أقصد أبداً جرحك.  
+If I ever made a mistake or said something wrong, I want you to know... I’m truly sorry.  
+لم يكن ذلك من قلبي، ولا بنية سيئة، فأنتِ شخص أقدّره بصدق.
+
+الوداع ليس سهلاً أبدًا، لكنه أحيانًا ضروريّ...  
+وأنا لا أقول وداعًا لأنني أريد ذلك، بل لأن الحياة تمضي، والقلوب تتوزع،  
+لكن رغم كل ذلك...  
+A part of my heart will always keep your name.
+
+قد لا تسير الأيام بنا جنبًا إلى جنب بعد الآن،  
+لكن كل خطوة من ماضيكِ في حياتي ستبقى نبضًا في ذاكرتي.  
+Our story may end here, but the feeling will stay... always.
+
+أتمنى لكِ السعادة من كل قلبي.  
+أتمنى أن تحققي كل أحلامك، وتعيشي حياة تليق بكِ وبقلبكِ الجميل.
+
+Keep growing, keep smiling, keep dreaming ✨  
+You are strong, and your light will never fade.
+
+شكراً لكِ على كل لحظة حقيقية قضيناها معاً.  
+شكراً للوجود الذي جعل لحياتي معنى مختلفاً، حتى ولو لفترة قصيرة.
+
+Goodbye أشواق…  
+But never truly farewell.
+
+– عماد
+  </div>
+
+  <!-- مشغل الموسيقى -->
+  <audio id="backgroundMusic" loop>
+    <source src="sad.mp3" type="audio/mp3">
+    متصفحك لا يدعم تشغيل الصوت
+  </audio>
+
+  <!-- سكربتات -->
+  <script>
+    function startMessage() {
+      document.getElementById("welcomeModal").style.display = "none";
+      document.getElementById("farewellMessage").style.display = "block";
+
+      // تشغيل الموسيقى 🔊
+      document.getElementById("backgroundMusic").play();
+
+      // قلـوب
+      setInterval(createHeart, 300);
+
+      // نجوم
+      generateStars();
+
+      // ألعاب نارية
+      for (let i = 0; i < 10; i++) {
+        setTimeout(createFirework, i * 250);
+      }
+    }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerText = "💖";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.animationDuration = (3 + Math.random() * 4) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }
+
+    function generateStars() {
+      const stars = document.getElementById("stars");
+      for (let i = 0; i < 100; i++) {
+        const star = document.createElement("div");
+        star.classList.add("star");
+        star.style.top = Math.random() * innerHeight + "px";
+        star.style.left = Math.random() * innerWidth + "px";
+        star.style.animationDelay = (Math.random() * 2) + "s";
+        stars.appendChild(star);
+      }
+    }
+
+    function createFirework() {
+      const firework = document.createElement("div");
+      firework.classList.add("firework");
+      firework.style.left = Math.random() * window.innerWidth + "px";
+      firework.style.backgroundColor = randomColor();
+      document.body.appendChild(firework);
+      setTimeout(() => firework.remove(), 1000);
+    }
+
+    function randomColor() {
+      const colors = ["#ff4d4d", "#ffcc00", "#66ff66", "#66ccff", "#cc99ff", "#ff66b3"];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+  </script>
 </body>
 </html>
